@@ -1,0 +1,14 @@
+torch>=2.5.1
+torchvision>=0.20.1
+torchaudio>=2.5.1
+transformers>=4.44.0
+
+tokenizers>=0.15.0
+safetensors>=0.4.0
+huggingface-hub>=0.20.0
+
+accelerate>=0.25.0
+datasets>=2.16.0
+
+# For CUDA support (automatically handled by torch installation with CUDA)
+# torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121

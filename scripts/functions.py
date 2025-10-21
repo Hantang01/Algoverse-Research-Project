@@ -5,7 +5,7 @@ import csv
 import os
 from datetime import datetime
 
-def format_prompt(num1, num2):
+def format_comparison_prompt(num1, num2):
     return f"""Which is bigger?
 
                 Options:
@@ -27,7 +27,7 @@ def load_model():
     )
     return tokenizer, model
 
-def ask_model_batch(prompts, tokenizer, model):
+def ask_model_batch(prompts, tokenizer, model, system_prompt):
 
     """
     Generates model responses for a batch of input prompts.
@@ -47,7 +47,7 @@ def ask_model_batch(prompts, tokenizer, model):
     messages_batch = []
     for prompt in prompts:
         messages = [
-            {"role": "system", "content": "You are a helpful assistant that compares numbers."},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": prompt}
         ]
         messages_batch.append(messages)
@@ -83,7 +83,8 @@ def prompt_accuracy_with_batching(
         batch_size,
         comparisons,
         tokenizer,
-        model
+        model,
+        system_prompt
     ):
 
     """Evaluate model accuracy on the provided comparisons list using batching.
@@ -107,9 +108,9 @@ def prompt_accuracy_with_batching(
         if batch_start % (batch_size * 5) == 0:
             print(f"Processing cases {batch_start + 1}-{batch_end} ({(batch_end/total_cases)*100:.1f}%)")
 
-        batch_prompts = [format_prompt(a, b) for a, b, label in batch_cases]
+        batch_prompts = [format_comparison_prompt(a, b) for a, b, label in batch_cases]
 
-        batch_responses = ask_model_batch(batch_prompts, tokenizer, model)
+        batch_responses = ask_model_batch(batch_prompts, tokenizer, model, system_prompt)
 
         for i, (a, b, expected_label) in enumerate(batch_cases):
             response = batch_responses[i]

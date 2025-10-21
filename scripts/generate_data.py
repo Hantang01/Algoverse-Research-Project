@@ -148,3 +148,10 @@ def write_file(method, size=1000):
     return f"src/datasets/{method.__name__}_{max_index}.csv"
 
 
+def generate_int_with_decimals(low_bound=0, high_bound=999, max_decimal_places=4,):
+
+    i = random.randint(low_bound, high_bound)
+    j = random.randint(1, 9)
+    decimal_places = random.randint(0, max_decimal_places)
+
+    return str(i) + '.' + str(j) + str('0' * decimal_places)

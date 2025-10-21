@@ -10,5 +10,9 @@ huggingface-hub>=0.20.0
 accelerate>=0.25.0
 datasets>=2.16.0
 
+# For visualization
+matplotlib>=3.5.0
+numpy>=1.21.0
+
 # For CUDA support (automatically handled by torch installation with CUDA)
 # torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121

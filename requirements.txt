@@ -14,5 +14,9 @@ datasets>=2.16.0
 matplotlib>=3.5.0
 numpy>=1.21.0
 
+# For attention analysis
+transformer-lens>=1.14.0
+circuitsvis>=1.43.0
+
 # For CUDA support (automatically handled by torch installation with CUDA)
 # torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121

@@ -52,7 +52,6 @@ def ask_model_batch(prompts, tokenizer, model, system_prompt):
         ]
         messages_batch.append(messages)
 
-    # Set pad token if not set
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -104,7 +103,6 @@ def prompt_accuracy_with_batching(
         batch_end = min(batch_start + batch_size, total_cases)
         batch_cases = comparisons[batch_start:batch_end]
 
-        # Progress indicator every 5 batches
         if batch_start % (batch_size * 5) == 0:
             print(f"Processing cases {batch_start + 1}-{batch_end} ({(batch_end/total_cases)*100:.1f}%)")
 
@@ -114,7 +112,6 @@ def prompt_accuracy_with_batching(
 
         for i, (a, b, expected_label) in enumerate(batch_cases):
             response = batch_responses[i]
-            # responses are strings like '1' or '2' or '3', expected_label may be str or int
             if str(response).strip() != str(expected_label).strip():
                 wrong += 1
     
@@ -156,24 +153,19 @@ def report_result(model_name, tested_method, data_size, accuracy):
         accuracy (float): Accuracy as a decimal (0.0 to 1.0)
     """
     
-    # Ensure outputs directory exists
     os.makedirs('outputs', exist_ok=True)
     
-    # Get current timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    # Check if results file exists, if not create with headers
     results_file = 'outputs/results.csv'
     file_exists = os.path.exists(results_file)
     
     with open(results_file, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         
-        # Write header if file is new
         if not file_exists:
             writer.writerow(['model_used', 'method_tested','data_size', 'accuracy', 'time_tested'])
         
-        # Write the result
         writer.writerow([model_name, tested_method, data_size, f"{accuracy:.4f}", timestamp])
     
     print(f"Results saved to {results_file}")

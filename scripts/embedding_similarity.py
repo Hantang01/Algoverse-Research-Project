@@ -36,3 +36,7 @@ print(f"Average cosine similarity: {average_similarity:.4f}")
 print(f"Standard deviation: {std_similarity:.4f}")
 print(f"Minimum similarity: {min_similarity:.4f}")
 print(f"Maximum similarity: {max_similarity:.4f}")
+
+
+#graph X:difference
+#Y: cosine similarity

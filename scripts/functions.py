@@ -15,6 +15,13 @@ def format_comparison_prompt(num1, num2):
 
                 Answer with **only** the option number (1, 2, or 3). Do not write anything else."""
 
+def save_attention(attention_html, path, layer):
+    # Create directory if it doesn't exist
+    output_dir = f"outputs/{path}"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    with open(f"{output_dir}/attention_viz_layer_{str(layer)}.html", "w", encoding="utf-8") as f:
+        f.write(attention_html)
 
 def load_model():
     model_name = "./my_llama_model"
@@ -23,6 +30,17 @@ def load_model():
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         dtype=torch.bfloat16,
+        device_map="auto",
+    )
+    return tokenizer, model
+
+def load_model_fp32():
+    model_name = "./my_llama_model"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer.padding_side = 'left' 
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype=torch.float32,
         device_map="auto",
     )
     return tokenizer, model

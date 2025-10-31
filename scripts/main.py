@@ -12,19 +12,20 @@ if __name__ == "__main__":
     tokenizer, model = load_model()
     print("Model loaded.")
 
+    print(model)
 
-    for i in range(1):
+    # for i in range(1):
 
 
-        path = write_file(Misleading_pair, data_size)
-        print(f"Generated 1000 Misleading_pair data at: {path}")
-        comparisons = load_data(path)
-        print("Data loaded")
+    #     path = write_file(Misleading_pair, data_size)
+    #     print(f"Generated 1000 Misleading_pair data at: {path}")
+    #     comparisons = load_data(path)
+    #     print("Data loaded")
 
-        accuracy = prompt_accuracy_with_batching(20, comparisons, tokenizer, model, system_prompt)
+    #     accuracy = prompt_accuracy_with_batching(20, comparisons, tokenizer, model, system_prompt)
         
-        model_name = "my_llama_model"  
-        method_name = Misleading_pair.__name__
-        report_result(model_name, method_name, data_size, accuracy)
+    #     model_name = "my_llama_model"  
+    #     method_name = Misleading_pair.__name__
+    #     report_result(model_name, method_name, data_size, accuracy)
         
-    print("done")
+    # print("done")
